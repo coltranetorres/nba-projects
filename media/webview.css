@@ -51,6 +51,7 @@ body {
   bottom: 10px;
   left: 40px;
   width: 40px;
+  text-align: center;
   animation: windup 0.5s ease-out;
 }
 
