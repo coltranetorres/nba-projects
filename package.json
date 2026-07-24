@@ -1,0 +1,32 @@
+{
+  "name": "kobe-git-commit",
+  "displayName": "Kobe Git Commit",
+  "description": "Plays a Kobe sound and a toy-figure shooting animation every time you make a git commit.",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "kobeGitCommit.previewCelebration",
+        "title": "Kobe: Preview Celebration"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "test": "node ./out/test/commitWatcher.test.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.90.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0"
+  }
+}
