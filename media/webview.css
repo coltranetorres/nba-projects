@@ -31,7 +31,7 @@ body {
   height: 6px;
   background: #F58426;
   border-radius: 2px;
-  animation: rimShake 0.4s ease-out 1.7s;
+  animation: rimShake 0.4s ease-out 1.9s;
 }
 
 .net {
@@ -139,8 +139,8 @@ body {
 
 @keyframes shootBall {
   0% { opacity: 1; transform: translate(0, 0) scale(1); }
-  50% { transform: translate(90px, -110px) scale(0.9); }
-  100% { transform: translate(180px, -40px) scale(0.8); opacity: 1; }
+  55% { transform: translate(130px, -190px) scale(0.9); }
+  100% { transform: translate(218px, -150px) scale(0.85); opacity: 1; }
 }
 
 @keyframes rimShake {
@@ -150,6 +150,6 @@ body {
 }
 
 @keyframes land {
-  0% { opacity: 1; transform: translate(180px, -40px) scale(0.8); }
-  100% { opacity: 0; transform: translate(180px, 20px) scale(0.6); }
+  0% { opacity: 1; transform: translate(218px, -150px) scale(0.85); }
+  100% { opacity: 0; transform: translate(218px, -128px) scale(0.8); }
 }
