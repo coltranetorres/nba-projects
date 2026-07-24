@@ -42,4 +42,23 @@ run('undefined previous head with a recent matching commit is a new commit', () 
   assert.strictEqual(result.isNewCommit, true);
 });
 
+run('HEAD change with a matching log entry but no commitDate is not a new commit', () => {
+  const result = checkForNewCommit('abc', 'def', { hash: 'def' });
+  assert.strictEqual(result.isNewCommit, false);
+});
+
+run('HEAD change with a commit dated exactly 15000ms ago is a new commit (inclusive boundary)', () => {
+  const exactlyFifteenSecondsAgo = new Date(Date.now() - 15000);
+  const now = new Date();
+  const result = checkForNewCommit('abc', 'def', { hash: 'def', commitDate: exactlyFifteenSecondsAgo }, now);
+  assert.strictEqual(result.isNewCommit, true);
+});
+
+run('HEAD change with a future-dated commit (negative age) is not a new commit', () => {
+  const oneSecondInFuture = new Date(Date.now() + 1000);
+  const now = new Date();
+  const result = checkForNewCommit('abc', 'def', { hash: 'def', commitDate: oneSecondInFuture }, now);
+  assert.strictEqual(result.isNewCommit, false);
+});
+
 console.log('All commitWatcher tests passed.');

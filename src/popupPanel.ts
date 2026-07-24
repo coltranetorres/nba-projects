@@ -23,7 +23,14 @@ export function showKobeCelebration(extensionUri: vscode.Uri): void {
   activePanel = panel;
 
   const htmlPath = vscode.Uri.joinPath(mediaUri, 'webview.html').fsPath;
-  const rawHtml = fs.readFileSync(htmlPath, 'utf8');
+  let rawHtml: string;
+  try {
+    rawHtml = fs.readFileSync(htmlPath, 'utf8');
+  } catch (err) {
+    console.error('Kobe Git Commit: failed to read webview.html', err);
+    panel.dispose();
+    return;
+  }
 
   const cssUri = panel.webview.asWebviewUri(vscode.Uri.joinPath(mediaUri, 'webview.css'));
   const jsUri = panel.webview.asWebviewUri(vscode.Uri.joinPath(mediaUri, 'webview.js'));

@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { checkForNewCommit } from './commitWatcher';
+import { checkForNewCommit, CommitLogEntry } from './commitWatcher';
 import { showKobeCelebration } from './popupPanel';
 import { GitExtensionExports, Repository } from './gitTypes';
 
@@ -17,7 +17,7 @@ export function activate(context: vscode.ExtensionContext) {
     return;
   }
 
-  gitExtension.activate().then((exports) => {
+  Promise.resolve(gitExtension.activate()).then((exports) => {
     const api = exports.getAPI(1);
 
     const watchRepo = (repo: Repository) => {
@@ -34,7 +34,7 @@ export function activate(context: vscode.ExtensionContext) {
           }
           lastHeads.set(key, currentHead);
 
-          let latestLogEntry;
+          let latestLogEntry: CommitLogEntry | undefined;
           try {
             const entries = await repo.log({ maxEntries: 1 });
             latestLogEntry = entries[0];
@@ -52,7 +52,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     api.repositories.forEach(watchRepo);
     context.subscriptions.push(api.onDidOpenRepository(watchRepo));
-  });
+  }).catch((err) => console.error('Kobe Git Commit: failed to activate git extension', err));
 }
 
 export function deactivate() {}
