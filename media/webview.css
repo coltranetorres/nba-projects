@@ -115,11 +115,13 @@ body {
   position: absolute;
   bottom: 26px;
   left: 66px;
-  width: 12px;
-  height: 12px;
+  width: 18px;
+  height: 18px;
   background: #F58426;
   border-radius: 50%;
   opacity: 0;
+  offset-path: path('M 0 0 Q 100 -260 218 -150');
+  offset-rotate: 0deg;
   animation:
     shootBall 1.2s ease-in 0.7s forwards,
     land 0.4s ease-in 1.9s forwards;
@@ -138,9 +140,8 @@ body {
 }
 
 @keyframes shootBall {
-  0% { opacity: 1; transform: translate(0, 0) scale(1); }
-  55% { transform: translate(130px, -190px) scale(0.9); }
-  100% { transform: translate(218px, -150px) scale(0.85); opacity: 1; }
+  0% { opacity: 1; offset-distance: 0%; transform: scale(1); }
+  100% { opacity: 1; offset-distance: 100%; transform: scale(0.85); }
 }
 
 @keyframes rimShake {
@@ -150,6 +151,6 @@ body {
 }
 
 @keyframes land {
-  0% { opacity: 1; transform: translate(218px, -150px) scale(0.85); }
-  100% { opacity: 0; transform: translate(218px, -128px) scale(0.8); }
+  0% { opacity: 1; transform: scale(0.85) translateY(0); }
+  100% { opacity: 0; transform: scale(0.8) translateY(22px); }
 }
