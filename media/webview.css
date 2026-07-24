@@ -1,0 +1,155 @@
+body {
+  margin: 0;
+  background: #0d0d0d;
+  overflow: hidden;
+}
+
+.scene {
+  position: relative;
+  width: 360px;
+  height: 260px;
+  margin: 0 auto;
+}
+
+.hoop {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+}
+
+.backboard {
+  width: 6px;
+  height: 60px;
+  background: #eee;
+}
+
+.rim {
+  position: absolute;
+  top: 55px;
+  left: -34px;
+  width: 40px;
+  height: 6px;
+  background: #F58426;
+  border-radius: 2px;
+  animation: rimShake 0.4s ease-out 1.7s;
+}
+
+.net {
+  position: absolute;
+  top: 61px;
+  left: -30px;
+  width: 32px;
+  height: 24px;
+  border: 2px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  opacity: 0.85;
+}
+
+.figure {
+  position: absolute;
+  bottom: 10px;
+  left: 40px;
+  width: 40px;
+  animation: windup 0.5s ease-out;
+}
+
+.head {
+  width: 16px;
+  height: 16px;
+  background: #f4c542;
+  border-radius: 3px;
+  margin: 0 auto;
+}
+
+.jersey {
+  width: 24px;
+  height: 26px;
+  background: #552583;
+  color: #FDB927;
+  font-size: 9px;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: center;
+  line-height: 26px;
+  margin: 2px auto 0;
+  border-radius: 2px;
+}
+
+.arm {
+  position: absolute;
+  top: 18px;
+  width: 6px;
+  height: 18px;
+  background: #552583;
+  border-radius: 3px;
+}
+
+.arm-left {
+  left: -6px;
+}
+
+.arm-right {
+  right: -6px;
+  transform-origin: top center;
+  animation: shootArm 1.2s ease-out 0.5s forwards;
+}
+
+.shorts {
+  width: 22px;
+  height: 12px;
+  background: #FDB927;
+  margin: 0 auto;
+}
+
+.leg-left,
+.leg-right {
+  width: 6px;
+  height: 18px;
+  background: #552583;
+  display: inline-block;
+  margin: 0 1px;
+}
+
+.ball {
+  position: absolute;
+  bottom: 26px;
+  left: 66px;
+  width: 12px;
+  height: 12px;
+  background: #F58426;
+  border-radius: 50%;
+  opacity: 0;
+  animation:
+    shootBall 1.2s ease-in 0.7s forwards,
+    land 0.4s ease-in 1.9s forwards;
+}
+
+@keyframes windup {
+  0% { transform: translateY(0); }
+  60% { transform: translateY(4px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes shootArm {
+  0% { transform: rotate(30deg); }
+  40% { transform: rotate(-40deg); }
+  100% { transform: rotate(-70deg); }
+}
+
+@keyframes shootBall {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); }
+  50% { transform: translate(90px, -110px) scale(0.9); }
+  100% { transform: translate(180px, -40px) scale(0.8); opacity: 1; }
+}
+
+@keyframes rimShake {
+  0%, 100% { transform: translateX(0); }
+  30% { transform: translateX(-2px); }
+  60% { transform: translateX(2px); }
+}
+
+@keyframes land {
+  0% { opacity: 1; transform: translate(180px, -40px) scale(0.8); }
+  100% { opacity: 0; transform: translate(180px, 20px) scale(0.6); }
+}
